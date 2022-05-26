@@ -7,6 +7,11 @@ const basename = path.basename(__filename);
 const db = {};
 const sequelize = new Sequelize(process.env.POSTGRES_URI, {
   dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
 });
 
 fs.readdirSync(__dirname)
