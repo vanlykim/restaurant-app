@@ -1,7 +1,11 @@
 import moment from "moment";
+import { useState } from "react";
 import { MdLibraryAdd } from "react-icons/md";
+import CollectionModal from "./CollectionModal";
 
 const RestaurantItem = ({ restaurant }) => {
+  const [show, setShow] = useState(false);
+  const [restaurantId, setRestaurantId] = useState();
   return (
     <>
       <div className='col' key={restaurant.id}>
@@ -28,13 +32,24 @@ const RestaurantItem = ({ restaurant }) => {
             <div className='d-flex justify-content-end'>
               <button
                 type='button'
-                className='btn btn-dark btn-sm d-flex align-items-center gap-1'>
+                className='btn btn-dark btn-sm d-flex align-items-center gap-1'
+                data-restaurant-id={restaurant.id}
+                onClick={(e) => {
+                  setShow(true);
+                  setRestaurantId(e.target.getAttribute("data-restaurant-id"));
+                }}>
                 <MdLibraryAdd /> Add to collection
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <CollectionModal
+        show={show}
+        onHide={() => setShow(false)}
+        restaurantId={restaurantId}
+      />
     </>
   );
 };

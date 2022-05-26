@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
-import RestaurantItem from "../components/RestaurantItem";
-import Spinner from "../components/Spinner";
+import RestaurantItem from "./RestaurantItem";
+import Spinner from "./Spinner";
 import {
   getRestaurants,
   reset,
 } from "../features/restaurants/restaurantSlice.js";
+import { getCollections } from "../features/collections/collectionSlice";
 
 const RestaurantList = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const RestaurantList = () => {
         t: moment().format("HH:mm:ss"),
       })
     );
+    dispatch(getCollections());
 
     return () => {
       dispatch(reset());
