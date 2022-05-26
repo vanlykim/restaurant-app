@@ -6,8 +6,12 @@ const {
   updateCollection,
   deleteCollection,
 } = require("../controllers/collection");
+const { protect } = require("../middlewares/authMiddleware");
 
-router.route("/").post(createCollection).get(getCollections);
-router.route("/:id").put(updateCollection).delete(deleteCollection);
+router.route("/").post(protect, createCollection).get(protect, getCollections);
+router
+  .route("/:id")
+  .put(protect, updateCollection)
+  .delete(protect, deleteCollection);
 
 module.exports = router;

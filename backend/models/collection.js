@@ -2,13 +2,15 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Collection extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+    static async isCollectionNameExist(name, userId) {
+      const collection = await this.findOne({
+        where: { name, user_id: userId },
+      });
+      return !!collection;
+    }
+    static async isCollectionExist(id) {
+      const collection = await this.findByPk(id);
+      return !!collection;
     }
   }
   Collection.init(
