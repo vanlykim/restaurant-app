@@ -5,11 +5,14 @@ const {
   getRestaurantCollections,
   deleteRestaurantCollection,
 } = require("../controllers/restaurant-collection");
+const { protect } = require("../middlewares/authMiddleware");
 
 router
   .route("/")
-  .post(createRestaurantCollection)
-  .get(getRestaurantCollections);
-router.route("/:restaurantId/:collectionId").delete(deleteRestaurantCollection);
+  .post(protect, createRestaurantCollection)
+  .get(protect, getRestaurantCollections);
+router
+  .route("/:restaurantId/:collectionId")
+  .delete(protect, deleteRestaurantCollection);
 
 module.exports = router;
