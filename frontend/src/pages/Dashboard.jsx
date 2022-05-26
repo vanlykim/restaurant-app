@@ -1,4 +1,7 @@
+import RestaurantList from "../components/RestaurantList";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return <RestaurantList />;
 };
+
 export default Dashboard;
