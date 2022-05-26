@@ -3,10 +3,10 @@ const restaurants = require("../data/restaurant-data");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert("Restaurants", restaurants);
+    return queryInterface.bulkInsert("Restaurant", restaurants);
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("Restaurants", null, {});
+    return queryInterface.bulkDelete("Restaurant", null, {});
   },
 };

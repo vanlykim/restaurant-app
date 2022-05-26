@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
       sequelize,
       modelName: "Collection",
+      freezeTableName: true,
     }
   );
   return Collection;

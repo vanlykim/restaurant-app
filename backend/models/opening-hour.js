@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
       sequelize,
       modelName: "OpeningHour",
+      freezeTableName: true,
     }
   );
   return OpeningHour;

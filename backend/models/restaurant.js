@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
       sequelize,
       modelName: "Restaurant",
+      freezeTableName: true,
     }
   );
   return Restaurant;

@@ -4,13 +4,17 @@ const bcrypt = require("bcryptjs");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+    static async isEmailTaken(email) {
+      console.log("xxxxxxxxxxxxxxxxxxxxxxx");
+      const user = await this.findOne({ where: { email } });
+      console.log("xxxxxxxxxxxxxxxxxxxxxxx");
+      console.log(user);
+      return !!user;
+    }
+
+    async isPasswordMatch(password) {
+      const user = this;
+      return bcrypt.compare(password, user.password);
     }
   }
   User.init(
@@ -25,9 +29,16 @@ module.exports = (sequelize, DataTypes) => {
         beforeCreate: async (user) => {
           user.password = await bcrypt.hash(user.password, 8);
         },
+        afterCreate: (record) => {
+          delete record.dataValues.password;
+        },
+        afterUpdate: (record) => {
+          delete record.dataValues.password;
+        },
       },
       sequelize,
       modelName: "User",
+      freezeTableName: true,
     }
   );
   return User;
