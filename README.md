@@ -4,8 +4,7 @@ This is the restaurant app for Glints.
 
 ## Usage
 
-Rename the .env.example to .env and add your environment varaibles.
-Rename the backend/config/config.example.json to backend/config/config.json and add your database configurations.
+Rename the .env.example to .env and add your environment varaibles
 
 ### Install dependencies
 
