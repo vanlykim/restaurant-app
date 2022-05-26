@@ -8,6 +8,7 @@ const {
   collectionRoute,
   restaurantCollectionRoute,
 } = require("./routes");
+const { errorHandler } = require("./middlewares/errorMiddleware");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -18,5 +19,6 @@ app.use("/api/users", userRoute);
 app.use("/api/restaurants", restaurantRoute);
 app.use("/api/collections", collectionRoute);
 app.use("/api/restaurant-collections", restaurantCollectionRoute);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
