@@ -4,7 +4,8 @@ This is the restaurant app for Glints.
 
 ## Usage
 
-Rename the .env.example to .env and add your environment varaibles
+Rename the .env.example to .env and add your environment varaibles.
+Rename the backend/config/config.example.json to backend/config/config.json and add your database configurations.
 
 ### Install dependencies
 
@@ -26,13 +27,15 @@ npm run data
 ### Run migrations
 
 ```
-npx sequelize-cli db:migrate
+cd backend
+npx dotenv -e ../.env sequelize-cli db:migrate
 ```
 
 ### Run seeds
 
 ```
-npx sequelize-cli db:seed:all
+cd backend
+npx dotenv -e ../.env sequelize-cli db:seed:all
 ```
 
 ### Run both server and client at the same time
