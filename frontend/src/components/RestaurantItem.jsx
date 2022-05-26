@@ -48,7 +48,7 @@ const RestaurantItem = ({ restaurant }) => {
       <CollectionModal
         show={show}
         onHide={() => setShow(false)}
-        restaurantId={restaurantId}
+        restaurantId={parseInt(restaurantId)}
       />
     </>
   );

@@ -3,12 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { FaSave, FaPlus } from "react-icons/fa";
 import { Modal } from "react-bootstrap";
 import { createCollection } from "../features/collections/collectionSlice";
+import {
+  addToRestaurantCollection,
+  deleteFromRestaurantCollection,
+} from "../features/restaurant-collections/restaurantCollectionSlice";
 
 const CollectionModal = ({ show = false, onHide, restaurantId }) => {
   const [newCollection, setNewCollection] = useState(false);
   const collectionNameRef = useRef();
   const dispatch = useDispatch();
   const { collections } = useSelector((state) => state.collections);
+  const { restaurantCollections } = useSelector(
+    (state) => state.restaurantCollections
+  );
 
   return (
     <Modal show={show} onHide={onHide} size='sm' centered scrollable>
@@ -23,8 +30,34 @@ const CollectionModal = ({ show = false, onHide, restaurantId }) => {
                 <input
                   className='form-check-input'
                   type='checkbox'
+                  checked={
+                    restaurantCollections &&
+                    restaurantCollections.some(
+                      (el) =>
+                        el.restaurant_id === restaurantId &&
+                        el.collection_id === collection.id
+                    )
+                      ? true
+                      : false
+                  }
                   value={collection.id}
                   id={`collection${collection.id}`}
+                  onChange={(e) => {
+                    if (e.target.checked)
+                      dispatch(
+                        addToRestaurantCollection({
+                          restaurantId,
+                          collectionId: e.target.value,
+                        })
+                      );
+                    else
+                      dispatch(
+                        deleteFromRestaurantCollection({
+                          restaurantId,
+                          collectionId: e.target.value,
+                        })
+                      );
+                  }}
                 />
                 <label
                   className='form-check-label'

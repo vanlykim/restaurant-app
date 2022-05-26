@@ -9,6 +9,7 @@ import {
   reset,
 } from "../features/restaurants/restaurantSlice.js";
 import { getCollections } from "../features/collections/collectionSlice";
+import { getRestaurantCollections } from "../features/restaurant-collections/restaurantCollectionSlice";
 
 const RestaurantList = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const RestaurantList = () => {
       })
     );
     dispatch(getCollections());
+    dispatch(getRestaurantCollections());
 
     return () => {
       dispatch(reset());
